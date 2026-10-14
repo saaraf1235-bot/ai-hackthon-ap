@@ -20,7 +20,7 @@ with st.sidebar:
 
 @st.cache_resource(show_spinner=False)
 def setup_ai(_api_key):
-    llm = ChatGroq(groq_api_key=api_key, model="llama-3.3-70b-versatile")
+    llm = ChatGroq(groq_api_key=_api_key, model="llama-3.3-70b-versatile")
     return llm
 
 def ai_logic(query, context, llm):
