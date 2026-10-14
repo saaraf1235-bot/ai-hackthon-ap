@@ -19,7 +19,7 @@ with st.sidebar:
     st.markdown("[Get Free Groq Key](https://console.groq.com/keys)")
 
 @st.cache_resource
-def setup_ai(_api_key):
+def setup_ai(api_key):
     llm = ChatGroq(groq_api_key=api_key, model="llama-3.3-70b-versatile")
     return llm
 
