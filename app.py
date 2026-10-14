@@ -18,8 +18,8 @@ with st.sidebar:
     GROQ_API_KEY = st.text_input("Enter your Groq API Key", type="password")
     st.markdown("[Get Free Groq Key](https://console.groq.com/keys)")
 
-@st.cache_resource
-def setup_ai(api_key):
+@st.cache_resource(show_spinner=False)
+def setup_ai(_api_key):
     llm = ChatGroq(groq_api_key=api_key, model="llama-3.3-70b-versatile")
     return llm
 
