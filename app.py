@@ -19,7 +19,7 @@ if not GROQ_API_KEY:
     st.stop()
 
 # No cache - direct
-llm = ChatGroq(groq_api_key=GROQ_API_KEY.strip(), model="llama-3.3-70b-versatile")
+llm = ChatGroq(groq_api_key=GROQ_API_KEY.strip(), model="openai/gpt-oss-120b")
 
 def ai_logic(query, context):
     prompt = f"""Use context to answer. If not found say "Answer not found in document".
