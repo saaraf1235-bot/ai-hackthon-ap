@@ -5,14 +5,22 @@ from langchain_community.document_loaders import PyPDFLoader
 import os
 import tempfile
 
-st.set_page_config(page_title="AI Hackathon App", layout="wide")
-st.title("🚀 AI Hackathon Master App - No Torch Version")
+st.set_page_config(page_title="DocuMind AI", layout="wide")
+st.title("DocuMind AI - Chat With Any PDF")
 
-GROQ_API_KEY = st.text_input("Enter your Groq API Key", type="password")
+st.markdown("""
+<style>
+.stButton>button { background-color: #6C63FF; color: white; border-radius: 10px; }
+</style>
+""", unsafe_allow_html=True)
+with st.sidebar:
+    st.header("Settings")
+    GROQ_API_KEY = st.text_input("Enter your Groq API Key", type="password")
+    st.markdown("[Get Free Groq Key](https://console.groq.com/keys)")
 
 @st.cache_resource
 def setup_ai(_api_key):
-    llm = ChatGroq(groq_api_key=_api_key, model_name="llama-3.1-8b-instant")
+    llm = ChatGroq(groq_api_key=_api_key, model="llama-3.1-8b-instant")
     return llm
 
 def ai_logic(query, context, llm):
