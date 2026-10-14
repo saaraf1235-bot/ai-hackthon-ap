@@ -22,10 +22,16 @@ if not GROQ_API_KEY:
 llm = ChatGroq(groq_api_key=GROQ_API_KEY.strip(), model="openai/gpt-oss-120b")
 
 def ai_logic(query, context):
-    prompt = f"""Use context to answer. If not found say "Answer not found in document".
-    Context: {context}
-    Question: {query}
-    Answer:"""
+    if "No context" in context or context == "No context - general knowledge":
+        # For General Chat - no restriction
+        prompt = f"You are a helpful AI assistant. Answer this question: {query}"
+    else:
+        # For PDF Q&A - use document only
+        prompt = f"""Use the following context to answer. If not in context, say "Answer not found in document".
+        Context: {context}
+        Question: {query}
+        Answer:"""
+    
     response = llm.invoke(prompt)
     return response.content
 
